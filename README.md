@@ -3,5 +3,5 @@
 ## exe that script 
 
 ```bash
-wget https://raw.githubusercontent.com/arn-ob/bash-exe-ubuntu-20-04/main/domain.sh && chmod 755 domain.sh && ./domain.sh
+wget -c https://raw.githubusercontent.com/arn-ob/bash-exe-ubuntu-20-04/main/bash.sh && chmod 755 bash.sh && ./bash.sh
 ```
