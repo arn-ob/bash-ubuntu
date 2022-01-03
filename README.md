@@ -1,4 +1,4 @@
-# bash-exe-ubuntu-20-04
+# bash-exe-ubuntu
 
 ## exe that script 
 
