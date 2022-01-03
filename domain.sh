@@ -7,9 +7,11 @@ echo 'Domain manage for ubuntu 20.04';
 
 while :
 do
+    echo $'\n';
     echo '0: Exit';
     echo '1: Install domain';
     
+    echo $'\n';
     read -p 'Select your choice: ' selector;
     echo $'\n';
 

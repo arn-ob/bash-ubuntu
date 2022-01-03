@@ -26,7 +26,6 @@ do
     echo '8: Install kubernetes';
     
     echo $'\n';
-    
     read -p 'Select your choice: ' selector;
     echo $'\n';
     
