@@ -28,6 +28,7 @@ do
     echo '10: Install Goolge chrome';
     echo '11: Install MongoDB';
     echo '12: Install Git';
+    echo '13: Install Android Studio';
 
     echo $'\n';
     read -p 'Select your choice: ' selector;
@@ -230,6 +231,22 @@ do
             sudo apt autoremove
 
             continue; 
+        ;;
+        13)
+            echo "Install Android Studio "
+            
+            # install jdk
+            sudo apt install openjdk-11-jdk
+            
+            sudo add-apt-repository ppa:maarten-fonville/android-studio
+            sudo apt update
+            
+            # install andriod
+            sudo apt install android-studio
+            
+            sudo apt autoremove
+            
+            continue;
         ;;
         *)
             echo "Sorry, Try Again"
