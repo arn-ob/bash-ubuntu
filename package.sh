@@ -78,7 +78,8 @@ do
             apt-cache policy docker-ce
             sudo apt install docker-ce
             sudo systemctl --no-pager status docker
-            
+            sudo apt autoremove
+
             echo;
             continue;
         ;;
