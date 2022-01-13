@@ -24,6 +24,7 @@ do
     echo '6: Install Node JS';
     echo '7: Install node global packages (Ex: pm2, express)';
     echo '8: Install kubernetes';
+    echo '9: Install Goolge chrome';
     
     echo $'\n';
     read -p 'Select your choice: ' selector;
@@ -119,6 +120,17 @@ do
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             brew install gcc
+
+            echo;
+            continue;
+        ;;
+        8)
+            echo "Install Google Chrome"
+            sudo apt update
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            sudo apt -f install
+            sudo apt autoremove
 
             echo;
             continue;
