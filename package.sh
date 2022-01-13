@@ -211,6 +211,11 @@ do
             # install mongodb
             sudo apt-get install -y mongodb-org
             
+            # mongodb compass
+            wget https://downloads.mongodb.com/compass/mongodb-compass_1.29.6_amd64.deb
+            sudo dpkg -i mongodb-compass_1.29.6_amd64.deb
+
+            rm mongodb-compass_1.29.6_amd64.deb
             sudo apt autoremove
 
             continue;
