@@ -225,6 +225,7 @@ do
             sudo apt autoremove
 
             continue; 
+        ;;
         *)
             echo "Sorry, Try Again"
             continue;
