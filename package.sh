@@ -27,6 +27,7 @@ do
     echo '9: Install kubernetes';
     echo '10: Install Goolge chrome';
     echo '11: Install MongoDB';
+    echo '12: Install Git';
 
     echo $'\n';
     read -p 'Select your choice: ' selector;
@@ -39,12 +40,14 @@ do
         ;;
         1)
             echo "sudo apt-get update";
+            sudo apt autoremove
             sudo apt-get update
             
             continue;
         ;;
         2)
             echo "sudo apt-get update"
+            sudo apt autoremove
             sudo apt-get upgrade
             
             continue;
@@ -68,6 +71,8 @@ do
         4)
             echo "Installing Nginx"
             
+            sudo apt autoremove
+
             sudo apt update
             sudo apt install nginx
             sudo ufw app list
@@ -80,6 +85,9 @@ do
         ;;
         5)
             echo "Installing Lets Encrypt"
+
+            sudo apt autoremove
+
             sudo apt update
             sudo apt install certbot python3-certbot-nginx
             sudo nginx -t
@@ -90,12 +98,19 @@ do
         ;;
         6)
             echo "Installing Docker community edition"
+
+            sudo apt autoremove
+
             sudo apt update
+            
             sudo apt install apt-transport-https ca-certificates curl software-properties-common
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
             sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+            
             apt-cache policy docker-ce
+            
             sudo apt install docker-ce
+            
             sudo systemctl --no-pager status docker
             sudo apt autoremove
 
@@ -104,6 +119,9 @@ do
         ;;
         7)
             echo "Installing Node js"
+
+            sudo apt autoremove
+
             sudo apt update
             sudo apt install nodejs
             node -v
@@ -130,6 +148,8 @@ do
             echo "Install Node global packages (Ex: pm2, express)"
             echo ""
             
+            sudo apt autoremove
+
             echo "npm install"
             sudo apt install npm
 
@@ -152,7 +172,9 @@ do
         9)
             echo "Install kubernetes"
             sudo apt update
+
             sudo apt install git -y
+            
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             brew install gcc
@@ -189,8 +211,20 @@ do
             # install mongodb
             sudo apt-get install -y mongodb-org
             
+            sudo apt autoremove
+
             continue;
         ;;
+        12) 
+            echo "Install git";
+
+            sudo apt-get update;
+
+            sudo apt install git
+
+            sudo apt autoremove
+
+            continue; 
         *)
             echo "Sorry, Try Again"
             continue;
