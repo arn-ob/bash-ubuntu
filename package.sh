@@ -26,7 +26,8 @@ do
     echo '8: Install node global packages (Ex: pm2, express)';
     echo '9: Install kubernetes';
     echo '10: Install Goolge chrome';
-    
+    echo '11: Install MongoDB';
+
     echo $'\n';
     read -p 'Select your choice: ' selector;
     echo $'\n';
@@ -126,7 +127,7 @@ do
             continue;
         ;;
         8)
-            echo "Install node global packages (Ex: pm2, express)"
+            echo "Install Node global packages (Ex: pm2, express)"
             echo ""
             
             echo "npm install"
@@ -161,14 +162,33 @@ do
         ;;
         10)
             echo "Install Google Chrome"
+            
             sudo apt update
+            
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome-stable_current_amd64.deb
             sudo apt -f install
+            
             rm google-chrome-stable_current_amd64.deb
             sudo apt autoremove
 
             echo;
+            continue;
+        ;;
+        11)
+            echo "MongoDB install";
+            sudo apt-get update
+
+            wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+
+            sudo apt autoremove
+            sudo apt-get update
+
+            # install mongodb
+            sudo apt-get install -y mongodb-org
+            
             continue;
         ;;
         *)
