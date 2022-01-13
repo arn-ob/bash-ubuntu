@@ -216,7 +216,7 @@ do
             continue;
         ;;
         12) 
-            echo "Install git";
+            echo "Install Git";
 
             sudo apt-get update;
 
