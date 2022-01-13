@@ -18,13 +18,14 @@ do
     echo '0: Exit';
     echo '1: Update';
     echo '2: Upgrade';
-    echo '3: Install Nginx';
-    echo '4: Install Lets Encrypt';
-    echo '5: Install Docker';
-    echo '6: Install Node JS';
-    echo '7: Install node global packages (Ex: pm2, express)';
-    echo '8: Install kubernetes';
-    echo '9: Install Goolge chrome';
+    echo '3: Basic application install';
+    echo '4: Install Nginx';
+    echo '5: Install Lets Encrypt';
+    echo '6: Install Docker';
+    echo '7: Install Node JS';
+    echo '8: Install node global packages (Ex: pm2, express)';
+    echo '9: Install kubernetes';
+    echo '10: Install Goolge chrome';
     
     echo $'\n';
     read -p 'Select your choice: ' selector;
@@ -48,7 +49,24 @@ do
             continue;
         ;;
         3)
+            echo "Basic application install"
+
+            # Auto Remove
+            sudo apt autoremove
+
+            # curl
+            sudo apt update
+            sudo apt upgrade
+            sudo apt install curl
+
+            # yarn
+            sudo apt install curl
+            
+            continue;
+        ;;
+        4)
             echo "Installing Nginx"
+            
             sudo apt update
             sudo apt install nginx
             sudo ufw app list
@@ -59,7 +77,7 @@ do
             echo;
             continue;
         ;;
-        4)
+        5)
             echo "Installing Lets Encrypt"
             sudo apt update
             sudo apt install certbot python3-certbot-nginx
@@ -69,7 +87,7 @@ do
             echo;
             continue;
         ;;
-        5)
+        6)
             echo "Installing Docker community edition"
             sudo apt update
             sudo apt install apt-transport-https ca-certificates curl software-properties-common
@@ -83,21 +101,37 @@ do
             echo;
             continue;
         ;;
-        6)
+        7)
             echo "Installing Node js"
-            curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+            sudo apt update
+            sudo apt install nodejs
+            node -v
+
+            # Read Version
+            read -p 'Select your version(10-17): ' version; 
+            
+            curl -sL https://deb.nodesource.com/setup_$version.x -o nodesource_setup.sh
             sudo bash nodesource_setup.sh
             sudo apt install nodejs
             node -v
+
+            # Remove Nodesource
             sudo rm -R nodesource_setup.sh
             
+            # yarn
+            sudo apt update
+            sudo apt-get install yarn
+
             echo;
             continue;
         ;;
-        7)
+        8)
             echo "Install node global packages (Ex: pm2, express)"
             echo ""
             
+            echo "npm install"
+            sudo apt install npm
+
             echo "npm install"
             sudo npm install -g npm
             
@@ -114,7 +148,7 @@ do
             echo;
             continue;
         ;;
-        8)
+        9)
             echo "Install kubernetes"
             sudo apt update
             sudo apt install git -y
@@ -125,12 +159,13 @@ do
             echo;
             continue;
         ;;
-        8)
+        10)
             echo "Install Google Chrome"
             sudo apt update
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome-stable_current_amd64.deb
             sudo apt -f install
+            rm google-chrome-stable_current_amd64.deb
             sudo apt autoremove
 
             echo;
