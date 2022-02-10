@@ -27,47 +27,15 @@ do
             echo "Enter Domain Name"
             read -p 'Domain (Ex: xx.xx): ' domain
 
-            sudo mkdir -p /var/www/$domain/html
-            
-            sudo chown -R $USER:$USER /var/www/$domain/html
-            
-            sudo chmod -R 755 /var/www/$domain/html
-            
-            echo "Create index.nginx-debian.html";
-            
-            echo "
-                <!DOCTYPE html>
-                <html>
-                    <head>
-                        <title>Welcome to nginx!</title>
-                        <style>
-                            body {
-                                width: 35em;
-                                margin: 0 auto;
-                                font-family: Tahoma, Verdana, Arial, sans-serif;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Welcome to nginx!</h1>
-                        <p>If you see this page, the nginx web server is successfully installed and
-                        working. Further configuration is required.</p>
-                        <p>For online documentation and support please refer to
-                        <a href="http://nginx.org/">nginx.org</a>.<br/>
-                        Commercial support is available at
-                        <a href="http://nginx.com/">nginx.com</a>.</p>
-                        <p><em>Thank you for using nginx.</em></p>
-                    </body>
-                </html>
-            " >> /var/www/$domain/html/index.nginx-debian.html;
-            
             echo "
                 server {
                         listen 80;
                         listen [::]:80;
-                        root /var/www/$domain/html;
+                        root /var/www/html;;
                         index index.nginx-debian.html;
+                        
                         server_name $domain;
+                        
                         location / {
                             try_files $uri $uri/ =404;
                         }
