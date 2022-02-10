@@ -31,7 +31,7 @@ do
                 server {
                         listen 80;
                         listen [::]:80;
-                        root /var/www/html;;
+                        root /var/www/html;
                         index index.nginx-debian.html;
                         
                         server_name $domain;
