@@ -128,7 +128,7 @@ do
             node -v
 
             # Read Version
-            read -p 'Select your version(10-17): ' version; 
+            read -p 'Select your version(10-18): ' version; 
             
             curl -sL https://deb.nodesource.com/setup_$version.x -o nodesource_setup.sh
             sudo bash nodesource_setup.sh
