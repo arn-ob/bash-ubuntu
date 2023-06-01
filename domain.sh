@@ -34,10 +34,16 @@ do
                         root /var/www/html;
                         index index.nginx-debian.html;
                         
+                        proxy_connect_timeout       6000;
+                        proxy_send_timeout          6000;
+                        proxy_read_timeout          6000;
+                        send_timeout                6000;
+                        client_max_body_size 200M;
+
                         server_name $domain;
                         
                         location / {
-                            proxy_pass http://127.0.0.1:3000;
+                            proxy_pass http://127.0.0.1:8000;
                         }
                 }
             " >> /etc/nginx/sites-available/$domain
