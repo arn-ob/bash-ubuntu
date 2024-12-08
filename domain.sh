@@ -9,7 +9,8 @@ while :
 do
     echo $'\n';
     echo '0: Exit';
-    echo '1: Install domain';
+    echo '1: Install domain with letsencrypt';
+    echo '2: Install domain without letsencrypt';
     
     echo $'\n';
     read -p 'Select your choice: ' selector;
@@ -28,24 +29,24 @@ do
             read -p 'Domain (Ex: xx.xx): ' domain
 
             echo "
-                server {
-                        listen 80;
-                        listen [::]:80;
-                        root /var/www/html;
-                        index index.nginx-debian.html;
-                        
-                        proxy_connect_timeout       6000;
-                        proxy_send_timeout          6000;
-                        proxy_read_timeout          6000;
-                        send_timeout                6000;
-                        client_max_body_size 200M;
+server {
+        listen 80;
+        listen [::]:80;
+        root /var/www/html;
+        index index.nginx-debian.html;
+        
+        proxy_connect_timeout       6000;
+        proxy_send_timeout          6000;
+        proxy_read_timeout          6000;
+        send_timeout                6000;
+        client_max_body_size 200M;
 
-                        server_name $domain;
-                        
-                        location / {
-                            proxy_pass http://127.0.0.1:8000;
-                        }
-                }
+        server_name $domain;
+        
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+        }
+}
             " >> /etc/nginx/sites-available/$domain
             
             echo "Map With Site Enable";
@@ -55,6 +56,46 @@ do
             
             echo "letsencrypt install"
             certbot --nginx -d $domain
+            
+            echo "Domain Create Done";
+            echo $'\n';
+            continue;
+        ;;
+        2)
+            echo "sudo apt-get update";
+            sudo apt-get update
+
+            echo "Enter Domain Name"
+            read -p 'Domain (Ex: xx.xx): ' domain
+
+            echo "Enter Port Number"
+            read -p 'Number (Ex: 3000): ' port
+
+            echo "
+server {
+        listen 80;
+        listen [::]:80;
+        root /var/www/html;
+        index index.nginx-debian.html;
+        
+        proxy_connect_timeout       6000;
+        proxy_send_timeout          6000;
+        proxy_read_timeout          6000;
+        send_timeout                6000;
+        client_max_body_size 200M;
+
+        server_name $domain;
+        
+        location / {
+            proxy_pass http://0.0.0.0:$port;
+        }
+}
+            " >> /etc/nginx/sites-available/$domain
+            
+            echo "Map With Site Enable";
+            sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
+            
+            systemctl reload nginx
             
             echo "Domain Create Done";
             echo $'\n';
